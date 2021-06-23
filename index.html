@@ -18,7 +18,7 @@
          padding:0;
         }
 
-        ul li{
+        ul li {
            cursor:pointer;
            position:relative;
            padding:12px 8px 12px 40px;
@@ -28,11 +28,10 @@
            transition:0.2s; 
         
 
-        /* -webkit-user-select:none;
+        -webkit-user-select:none;
         -moz-user-select:none;
         -ms-user-select:none;
-        user-select:none; */
-        
+         user-select:none; 
         }
 
         ul li:nth-child(odd) {
@@ -74,7 +73,7 @@
             color:white;
         }
 
-        .header{
+        .header {
             background-color:#f44336;
             padding:40px 40px;
             color:white;
@@ -105,7 +104,7 @@
 
         }
 
-        .addBtn:hover{
+        .addBtn:hover {
             background-color:#bbb;
         }
     </style>
@@ -118,74 +117,78 @@
         <span onclick="newElement()" class="addBtn">Add</span>
     </div>
 
-    <ul id="myUL">
+     <ul id="myUL">
+        <ul id="dynamic-list">
         <li>To have control of my Monthly Budget</li>
-        <li class="checked">Reduce ant expenses</li>
+        <li>Reduce small expenses</li>
         <li>Do not make emotional purchases</li>
         <li>Better manage my money</li>
         <li>Pay my debts on time</li>
-        <li></li>
         <li>Finish 2020 debt-free</li>
         <li>Multiply my income</li>
         <li>Diversify my investments</li>
         <li>Plan my future (Retirement Plan)</li>
         <li>Invest in my Financial Education</li>
     </ul>
+
     
     <script>
-        var myNodelist= document.getElementsByTagName("LI");
-        var i;
-        for (i = 0; i < myNodelist.length; i++) {
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            myNodelist[i].appendChild(span);
-        }
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
 
-        var close = document.getElementsByClassName("close");
-        var i;
-        for (i = 0; i < close.length; i++) {
-            close [i].onclick = function() {
-                var div = this.parentElement;
-                div.style.display = "none";
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
 
-            }
-        }
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
 
-        var list = document.querySelector('ul');
-        list.addEventListener('click', function(ev) {
-            if (ev.target.tagName === 'LI') {
-                ev.target.classList.toggle('checked');
-            }
-        },false);
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
 
-        function newElement(){
-            var li = document.createElement("li");
-            var inputValue = document.createElement("myInput").value;
-            var t = document.createTextNode(inputValue);
-            li.appendChild(t);
-            if (inputValue === '') {
-                alert("You must write something!");
-            } else {
-            
-            document.getElementById("myUL").appendChild(li);
-            }
-            document.getElementById("myInput").value = "";
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
 
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            li.appendChild(span);
-
-            for (i = 0; i < close.length; i++) {
-                close[i].onclick = function() {
-                    var div = this.parentElement;
-                    div.style.display = "none";
-                }
-            }
-        }
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+       
     </script>
 
 </body>
